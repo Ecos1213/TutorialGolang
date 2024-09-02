@@ -1,24 +1,56 @@
-// los paquetes terceros son paquetes que no estan incluidos en las libreria estandard de go como el paquete fmt, estos paquetes terceros han sido desarrollado y mantenidos por las comunidades de programadores de go o por otros desarrolladores de go
-// para trabajar con paquetes de terceros (paquetes externos) tenemos que inicializar un manejador de modulos para nuestra aplicacion, entonces para inicializar un manejador de modulos para nuestra aplicacion vamos a ejcutar el siguiente comando dentro de nuestro proyecto, el comando es go mod, para el manejador de modulos y con init vamos a  inicializar el manejador de modulos despues de init sigue el nombre con el cual vamos a manejar el modulo de nuestro proyecto
-// go mod init nombredemanejadordemodulos
-// este comando creara un archivo llamado go.mod, el cual contiene el nombre del manejador del modulo (module holamundo) y una version de go (go 1.23.0)
-// el archivo go.mod es un archivo que se utiliza para definir y gestionar los modulos y las dependencias de nuestro proyecto en go, tambien cuando empezemos a descargar y utilizar los archivos externos tambien se va a crear un archivo llamado go.sum, este archivo go.sum es un archivo se utiliza para registrar la suma de verificacion de los modulos y las dependencias de nuestro proyecto
-// ahora vamos a utilizar el paquete cod, es un paquete externo de tercero para el lenguaje de programacion go que proporciona una serie de citas famosas como el hola mundo
-// con el comando go get rutaderepositoriodelpaquete descargamos el paquete y agregarlo a nuestro proyecto, este puede estar en github como tambien puede estar en otra parte el paquete quite se descarga de la siguiente manera
-// go get rsc.io/quote
-// al hacer esto descargara el paquete y simeplemente agregara el modulo en el archivo go.mod y crear el archivo go.sum con el respectivo modulo
-
 package main
 
 import (
 	"fmt"
 
 	"rsc.io/quote"
-) // en el import para agregar varios paquetes tenemos que usar el parentesis y dentro del parentesis agregamos todos los paquetes que vamos a usar, para agregar el paquete externo simplemente colocamos la ruta del paquete que es rsc.io/quote
+)
+
+var firstName2, lastName2, age2 = "alex", "roel", 27 // las variables podemos declararlas tanto fuera como adentro de la funcion, incluso como es una variable con scope global podemos usarlos en varias funciones del mismo archivo
 
 func main() {
-	fmt.Println("Hola Mundo")
-	fmt.Println(quote.Hello()) // ahora podemos usar el objeto quote y llamar la funcion anidada Hello que tiene quote esto nos imprimira Hello world
-}
+	fmt.Println(firstName2, lastName2, age2)
+	fmt.Println(quote.Hello())
+	// declaracion de variables
+	//var firstName string // una forma de declarar una variable es usando primero la palabra var para declarar la variable luego sigue el nombre de la variable y despues el tipo de dato en este caso es una cadena por eso string, en go si declaramos una variable sin usarla golang nos dara un error al compilar
+	//var firstName, lastName string // si necesitamos declarar varias variables del mismo tipo simplemente usamos var para declarar las variables y despues los variables separadas con coma y al final el tipo de dato en este caso seria string por que todas las variables son cadenas
+	//var age int                    // como vemos esta variable esta declarada como integer y es otro tipo de dato por eso tenemos que declaralo en otra linea de codigo
 
-//con go run hola.go ejecutamos nuestro programa en consola
+	// hay una manera de declarar varias variables de diferentes tipos de la siguiente forma
+	/*var (
+		firstName, lastName string
+		age                 int
+	)*/ // como vemos simplemente usamos la palabra clave var y entre parentesis colocamos las variables, la variable tiene que ir con sus respectivos tipos de datos separado con comas y si tiene un diferente tipo de dato se deja un salto de linea para definir el siguiente tipo de dato con sus respectivas varaibles y tipos de datos
+
+	// para definir las variables tenemos que hacerlo aparte de la declaracion y simplemente la igualamos con el simbolo =
+	/*firstName = "Alex"
+	lastName = "Roel"
+	age = 27*/
+	// aunque asignemos variables aun asi si no usamos las variables para alguna operacion, al compilar o correr golang nos dara un error
+
+	// si queremos declarar las variables y definirlas tambien podemos hacerlo de la siguiente manera
+	/*var (
+		firstName string = "Alex"
+		lastName  string = "Roel"
+		age       int    = 27
+	)*/ // como vemos para declarar y definir simplemente usamos la misma nomenclatura que usamos para declarar varias variables de varios tipos pero la diferencia es que todas por obligacion tiene que tener salto de linea con su respectivo tipo de dato y dato definiendo la variable
+
+	/*var (
+		firstName = "Alex"
+		lastName  = "Roel"
+		age       = 27
+	)*/ // una cosa a tener en cuenta es que en golang cuando inicializamos no es necesdario colocar el tipo de dato por que automaticamente lo interpreta, se vuelve un tipo dinamico pero recuerda que a un siendo tipo dinamico golang lo interpreta como con su respectivo tipo de dato si es string sera string, si solo la declaramos ahi si necesitamos colocarle el tipo de dato
+
+	// Si tenemos todas las variables definida con datos podemos incluso simplificar mas el codigo y dejarlo en una sola linea sin parentesis de la siguiente manera
+	var firstName, lastName, age = "Alex", "Roel", 27 // como vemos usamos aun var y dividimos cada variable con coma despues le damos igual y cada dato pertenece a una variable segun su orden, el primer dato va a ir a la primera variable y asi sucesivamente para cada dato y variable, ademas asigna tipo de dato como vemos los dos primeros son de tipo string por que su dato es un string osea que estas variables son de tipo de dato string y seran string y su modificacion sera string a menos que hagamos un cast esto sucede igual tambien con la variable int
+
+	// para que no nos de error por no usar las variables simplemente podemos imprimirla para que no nos de error
+	fmt.Println(firstName, lastName, age) // como vemos en println podemos imprimir varias variables simplemente colocando varias variables en el parametro del metodo println separados con comas
+
+	//tambien hay una manera de inicializar las variables sin la palabra reservada var y ademas tambien podemos casi todo lo que vimos y es usando el simbolo :=
+	firstNameDaniel, laslastNameDaniel, ageDaniel := "Daniel", "Viera", 34 // con el simbolo := estamos declarando variables nuevas e inicializandolas, por lo tanto no se puede usar el simbolo := para modificar y estas tipo de declaracion e inicializacion solo se puede usar dentro de las funciones no fuera, para hacerlo fuera toca usar var
+	ageDiana := 35
+	ageDiana = 34
+	fmt.Println(firstNameDaniel, laslastNameDaniel, ageDaniel)
+	fmt.Println(ageDiana)
+}
